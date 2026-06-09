@@ -311,38 +311,6 @@ If you only have time to run one test before pushing, run that one.
   configurable. If you genuinely need to change one, write a new DECISIONS
   entry first.
 
-## What NOT to commit
-
-Hard "never":
-
-- credentials of any kind (`.env`, `*.key`, `*.pem`, `credentials.json`)
-- real flight logs (`*.mavlink`, `*.tlog`, `*.bag`, `*.ulg`)
-- mission SQLite files from real flights (`logs/missions/*.sqlite`)
-- video / images from real missions
-
-Belongs in DVC, not Git:
-
-- `data/raw/`, `data/processed/`, `data/synthetic/`
-- `models/weights/*.pt`, `*.onnx`
-- `models/exports/*.engine`
-- `models/checkpoints/`
-
-Generated junk (covered by `.gitignore`):
-
-- `__pycache__/`, `*.pyc`, `.pytest_cache/`, `.ruff_cache/`, `.mypy_cache/`
-- `.coverage`, `htmlcov/`, `coverage.xml`
-- `.venv/`, `venv/`
-- `runs/`, `artefacts/`, `mlruns/`, `wandb/`
-- `logs/`, `*.log`, `*.sqlite`
-- `.DS_Store`, `.vscode/`, `.idea/`
-
-Quick check before pushing:
-
-```bash
-find . -type f -size +1M -not -path "./.git/*" -not -path "./.venv/*"
-git status --ignored
-```
-
 ## Export-control note
 
 UAS object-recognition + targeting code can fall under ITAR / EAR /
