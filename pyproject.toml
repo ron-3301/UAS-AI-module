@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uas-ai-module"
+version = "0.1.0"
+description = "on-board AI module for UAS - recognition, identification, targeting"
+requires-python = ">=3.10"
+readme = "README.md"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["notebooks", "data", "models"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "slow: marks tests as slow",
+    "hitl: hardware-in-the-loop tests (need Jetson)",
+]
+
+[tool.mypy]
+python_version = "3.10"
+strict = false
+ignore_missing_imports = true
+
+# coverage excludes phase-3/4/5 stubs (raise NotImplementedError, replaced
+# + covered in later phases). every stub also has `# pragma: no cover`.
+[tool.coverage.run]
+source = ["src", "scripts"]
+omit = [
+    "src/cli.py",                          # exercised by hand, not pytest
+    "src/logging_setup.py",                # trivial sink wiring
+    "src/geolocation/*",                   # phase 4 W11-W12
+    "src/output/video_annotator.py",       # phase 3 W9 (RTSP push)
+    "scripts/calibrate_camera.py",         # phase 1 W1 (hardware)
+    "scripts/benchmark_latency.py",        # phase 5 W13
+    "scripts/export_kml.py",               # phase 6
+    "scripts/iaa_report.py",               # phase 2 W4
+    "scripts/build_trt_engines.sh",
+    "scripts/validate_configs.py",         # exercised by CI step, not pytest
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+show_missing = true
+skip_covered = false

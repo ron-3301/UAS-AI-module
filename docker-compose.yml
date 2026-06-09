@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  ai-module:
+    build:
+      context: .
+      target: runtime
+    image: uas-ai:dev
+    container_name: uas-ai
+    volumes:
+      - ./configs:/workspace/configs:ro
+      - ./models:/workspace/models:ro
+      - ./logs:/workspace/logs
+      - ./data:/workspace/data
+    ports:
+      - "5005:5005/udp"
+      - "8554:8554"
+      - "8080:8080"
+    depends_on: [mqtt]
+    restart: unless-stopped
+
+  mqtt:
+    image: eclipse-mosquitto:2.0
+    container_name: uas-mqtt
+    volumes:
+      - ./configs/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./logs/mqtt:/mosquitto/log
+      - mqtt-data:/mosquitto/data
+    ports:
+      - "1883:1883"
+    restart: unless-stopped
+
+  label-studio:
+    image: heartexlabs/label-studio:1.13.1
+    container_name: uas-label-studio
+    environment:
+      - LABEL_STUDIO_USERNAME=admin@local
+      - LABEL_STUDIO_PASSWORD=changeme
+    volumes:
+      - ls-data:/label-studio/data
+      - ./data:/label-studio/data/uas
+    ports:
+      - "8081:8080"
+
+volumes:
+  mqtt-data:
+  ls-data:
