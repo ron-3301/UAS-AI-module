@@ -1,0 +1,25 @@
+version: "1.0"
+# Detection-class threat weights (w_class), per docs/11_class_taxonomy_and_threat_model.md
+# Range [0, 1]. Reviewed each mission cycle.
+weights:
+  Person:           0.50
+  Vehicle-Wheeled:  0.80
+  Vehicle-Tracked:  0.95
+  Aircraft-Rotary:  0.90
+  Aircraft-Fixed:   0.85
+  Watercraft:       0.60
+  Structure-Temp:   0.40
+
+# Per-sub-label overrides (look-up by identification label from the classifier).
+overrides:
+  Civilian:         0.05
+  Civilian-Sedan:   0.10
+  Civilian-Truck:   0.15
+  Combatant-Unarmed: 0.30
+  Combatant-Armed:  0.95
+  T-90:             1.00
+  T-72:             1.00
+  M1-Abrams:        1.00
+  BMP-2:            0.95
+  Humvee:           0.85
+  Toyota-Hilux:     0.70

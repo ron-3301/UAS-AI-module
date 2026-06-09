@@ -1,0 +1,24 @@
+version: "1.0"
+camera_id: cam01
+make_model: "Sony IMX477 + 6mm M12 lens"
+resolution: { width: 1920, height: 1080 }
+
+# Pinhole intrinsics (pixels) - placeholder values; replace with output of
+# scripts/calibrate_camera.py before first flight.
+fx: 1462.3
+fy: 1461.8
+cx: 960.1
+cy: 540.4
+
+distortion_model: plumb_bob
+distortion: { k1: -0.281, k2:  0.108, p1: 0.0004, p2: -0.0009, k3: 0.0 }
+
+# Mounting transform: camera frame -> body frame
+# Body frame: +X forward, +Y right, +Z down (FRD)
+mount:
+  translation_m: { x: 0.10, y: 0.00, z: -0.05 }
+  rotation_deg:  { roll: 0.0, pitch: -90.0, yaw: 0.0 }
+
+calibrated_on: "2026-05-22"
+calibrated_by: "scripts/calibrate_camera.py"
+reprojection_error_px: 0.41

@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "training.yaml",
+  "type": "object",
+  "required": ["version", "dataset", "detector", "classifier", "augmentation"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "dataset": {
+      "type": "object",
+      "required": ["root", "splits", "image_size"],
+      "properties": {
+        "root":       { "type": "string" },
+        "splits":     {
+          "type": "object",
+          "required": ["train", "val", "test"],
+          "properties": {
+            "train": { "type": "number", "minimum": 0, "maximum": 1 },
+            "val":   { "type": "number", "minimum": 0, "maximum": 1 },
+            "test":  { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "stratify_by": { "enum": ["class", "none"] },
+        "image_size":  { "type": "integer", "enum": [320, 416, 480, 512, 640, 800, 960, 1280] },
+        "cache":       { "enum": ["ram", "disk", "none"] }
+      }
+    },
+    "detector": {
+      "type": "object",
+      "required": ["arch", "epochs", "batch_size"],
+      "properties": {
+        "arch":          { "enum": ["yolov8n", "yolov8s", "yolov8m", "yolov8l", "yolov8x", "yolov10m", "rt-detr-l"] },
+        "pretrained":    { "type": "string" },
+        "epochs":        { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "batch_size":    { "type": "integer", "minimum": 1, "maximum": 1024 },
+        "optimiser":     { "enum": ["SGD", "Adam", "AdamW"] },
+        "lr0":           { "type": "number", "exclusiveMinimum": 0 },
+        "lrf":           { "type": "number", "exclusiveMinimum": 0 },
+        "momentum":      { "type": "number", "minimum": 0, "maximum": 1 },
+        "weight_decay":  { "type": "number", "minimum": 0 },
+        "warmup_epochs": { "type": "integer", "minimum": 0 },
+        "patience":      { "type": "integer", "minimum": 0 }
+      }
+    },
+    "classifier": {
+      "type": "object",
+      "required": ["arch", "epochs", "batch_size"],
+      "properties": {
+        "arch":            { "type": "string" },
+        "pretrained":      { "type": "string" },
+        "epochs":          { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "batch_size":      { "type": "integer", "minimum": 1, "maximum": 1024 },
+        "optimiser":       { "enum": ["SGD", "Adam", "AdamW"] },
+        "lr":              { "type": "number", "exclusiveMinimum": 0 },
+        "weight_decay":    { "type": "number", "minimum": 0 },
+        "label_smoothing": { "type": "number", "minimum": 0, "maximum": 0.5 },
+        "mixup_alpha":     { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "augmentation": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["p"],
+        "properties": { "p": { "type": "number", "minimum": 0, "maximum": 1 } }
+      }
+    },
+    "experiment": {
+      "type": "object",
+      "properties": {
+        "tracker":      { "enum": ["mlflow", "wandb", "none"] },
+        "tracking_uri": { "type": "string" },
+        "seed":         { "type": "integer" }
+      }
+    }
+  }
+}
