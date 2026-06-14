@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "dataset_id": "uas-rebuild-example",
+  "taxonomy_version": "1.0",
+  "classes": [
+    "Person",
+    "Vehicle-Wheeled",
+    "Vehicle-Tracked",
+    "Aircraft-Rotary",
+    "Aircraft-Fixed",
+    "Watercraft",
+    "Structure-Temp"
+  ],
+  "root": "../../datasets/example",
+  "sources": ["synthetic-placeholder", "uploaded-taxonomy"],
+  "splits": [
+    {
+      "name": "train",
+      "image_dir": "images/train",
+      "annotation_file": "annotations/train.json",
+      "image_count": 700,
+      "class_counts": {
+        "Person": 100,
+        "Vehicle-Wheeled": 200,
+        "Vehicle-Tracked": 150,
+        "Aircraft-Rotary": 60,
+        "Aircraft-Fixed": 40,
+        "Watercraft": 50,
+        "Structure-Temp": 80
+      }
+    },
+    {
+      "name": "val",
+      "image_dir": "images/val",
+      "annotation_file": "annotations/val.json",
+      "image_count": 150,
+      "class_counts": {
+        "Person": 20,
+        "Vehicle-Wheeled": 40,
+        "Vehicle-Tracked": 30,
+        "Aircraft-Rotary": 12,
+        "Aircraft-Fixed": 8,
+        "Watercraft": 10,
+        "Structure-Temp": 16
+      }
+    },
+    {
+      "name": "test",
+      "image_dir": "images/test",
+      "annotation_file": "annotations/test.json",
+      "image_count": 150,
+      "class_counts": {
+        "Person": 20,
+        "Vehicle-Wheeled": 40,
+        "Vehicle-Tracked": 30,
+        "Aircraft-Rotary": 12,
+        "Aircraft-Fixed": 8,
+        "Watercraft": 10,
+        "Structure-Temp": 16
+      }
+    }
+  ],
+  "notes": "Example manifest for governance tests; paths are placeholders unless --check-files is used."
+}

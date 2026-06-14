@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "plan_id": "detector-export-example",
+  "artifacts": [
+    {
+      "name": "detector-example",
+      "role": "detector",
+      "source_checkpoint": "../../training_runs/detector/best.pt",
+      "onnx_output": "../../models/detector.onnx",
+      "metadata_output": "../../models/detector.metadata.json",
+      "tensorrt_output": "../../models/detector.engine",
+      "input_shape": [1, 3, 640, 640],
+      "class_names": [
+        "Person",
+        "Vehicle-Wheeled",
+        "Vehicle-Tracked",
+        "Aircraft-Rotary",
+        "Aircraft-Fixed",
+        "Watercraft",
+        "Structure-Temp"
+      ],
+      "opset": 17,
+      "precision": "fp16"
+    }
+  ]
+}

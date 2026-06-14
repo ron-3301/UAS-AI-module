@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 # layer 5 - write every detection (kept AND suppressed) to sqlite.
 # schema lives in docs/13 §2.
-from __future__ import annotations
+
 
 import sqlite3
 from pathlib import Path

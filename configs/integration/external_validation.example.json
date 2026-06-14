@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "plan_id": "phase17-example",
+  "advisory_only": true,
+  "checks": [
+    {
+      "name": "mavlink-sitl-readonly",
+      "kind": "mavlink",
+      "enabled": true,
+      "parameters": {
+        "endpoint": "udp:0.0.0.0:14550",
+        "timeout_s": 1.0
+      }
+    },
+    {
+      "name": "camera-source",
+      "kind": "camera",
+      "enabled": true,
+      "parameters": {
+        "source": "0",
+        "frames": 1
+      }
+    },
+    {
+      "name": "onnx-detector-metadata",
+      "kind": "onnx",
+      "enabled": true,
+      "parameters": {
+        "metadata": "models/detector.metadata.example.json"
+      }
+    },
+    {
+      "name": "tensorrt-engine-boundary",
+      "kind": "tensorrt",
+      "enabled": true,
+      "parameters": {
+        "engine": "models/detector.engine"
+      }
+    },
+    {
+      "name": "observability",
+      "kind": "observability",
+      "enabled": true,
+      "parameters": {
+        "prometheus": true
+      }
+    }
+  ]
+}

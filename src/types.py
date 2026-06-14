@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 # shared dataclasses used between the pipeline layers.
 # kept here so detection / id / geo / output don't import each other and
 # end up in circular-import hell.
-from __future__ import annotations
+
 
 from dataclasses import dataclass, field
 from typing import Any

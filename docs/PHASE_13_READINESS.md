@@ -16,7 +16,7 @@ Latest checks:
 python scripts/validate_assets.py        PASS
 python scripts/check_runtime_deps.py     PASS
 python scripts/jetson_health_check.py    PASS
-pytest -q                               69 passed
+pytest -q                               91 passed
 CLI dry-run schema validation            PASS
 CLI replay schema validation             PASS
 ```

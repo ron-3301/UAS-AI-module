@@ -99,7 +99,7 @@ Hard-coded safety behavior:
 Current test result:
 
 ```text
-69 passed
+91 passed
 ```
 
 Test coverage areas:

@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "source_manifest.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "file_count", "files"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "file_count": { "type": "integer", "minimum": 0 },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "size_bytes", "sha256"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "size_bytes": { "type": "integer", "minimum": 0 },
+          "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+        }
+      }
+    }
+  }
+}

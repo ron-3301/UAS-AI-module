@@ -14,6 +14,10 @@ Uploaded/reference files have been organized into a conventional project layout:
 - `docs/PHASE_13_COMPLETION_REPORT.md` — completed Phase 13 audit/stabilization report
 - `docs/PHASE_14_RUNTIME_INTEGRATION.md` — runtime integration boundary work
 - `docs/PHASE_14_COMPLETION_REPORT.md` — completed Phase 14 report
+- `docs/PHASE_15_PREFLIGHT_INTEGRATION.md` — SITL/hardware/model preflight integration
+- `docs/PHASE_16_REGRESSION_RELEASE_GOVERNANCE.md` — replay regression and release governance
+- `docs/PHASE_17_EXTERNAL_EXECUTION_READINESS.md` — external SITL/hardware validation readiness
+- `docs/PHASE_18_DATASET_TRAINING_EXPORT_GOVERNANCE.md` — dataset/training/export governance preparation
 - `docs/implementation_audit.md` — Phase 13 implementation audit
 - `docs/module_status_matrix.md` — module-by-module status matrix
 - `docs/RELEASE_CHECKLIST.md` — baseline validation checklist
@@ -55,6 +59,10 @@ PYTHONPATH=src python -m uas_ai_module.cli --replay tests/fixtures/replay/sample
 python scripts/jetson_health_check.py
 python scripts/phase13_check.py --stop-on-failure
 python scripts/phase14_check.py --stop-on-failure
+python scripts/phase15_check.py --stop-on-failure
+python scripts/phase16_check.py --stop-on-failure
+python scripts/phase17_check.py --stop-on-failure
+python scripts/phase18_check.py --stop-on-failure
 ```
 
 If `jsonschema` is installed, `validate_assets.py` also runs Draft-07 schema checks.

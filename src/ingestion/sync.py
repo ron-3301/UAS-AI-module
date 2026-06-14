@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 # frame <-> telemetry synchroniser (layer 1).
 # simplified version of the algo in docs/13 §4 - good enough for bench
 # rig + replay paths:
@@ -5,7 +7,7 @@
 #   if skew > max_stale_ms, packet is flagged telemetry_stale.
 # downstream then decides whether to suppress (docs/12 §5) or interpolate
 # (geolocation layer).
-from __future__ import annotations
+
 
 from datetime import datetime, timezone
 

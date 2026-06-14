@@ -42,7 +42,7 @@ Out of scope for this audit pass:
 | Package imports | Pass | `tests/test_phase13_imports_and_cli_contracts.py` imports all runtime modules. |
 | Asset validation | Pass | JSON/XML/schema validation via `scripts/validate_assets.py`. |
 | Runtime dependency guard | Pass | PyTorch-family packages excluded from `requirements-runtime.txt`. |
-| Unit/integration tests | Pass | Current baseline: `69 passed` after Phase 13 checks are added. |
+| Unit/integration tests | Pass | Current baseline: `91 passed` after Phase 13 checks are added. |
 | Dry-run CLI | Pass | Emits schema-valid advisory JSON. |
 | Replay CLI | Pass | Emits schema-valid replay packets. |
 | Output schema validation | Pass | Advisory packet validates against `advisory_v1_1`. |

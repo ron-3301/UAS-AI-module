@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 # greedy IoU tracker. placeholder for ByteTrack (Phase 3 W7).
 # assigns stable, monotonic track_id when IoU vs a prior box > threshold,
 # ages out tracks not seen for max_age frames.
-from __future__ import annotations
+
 
 from dataclasses import dataclass
 

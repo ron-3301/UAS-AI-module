@@ -13,6 +13,10 @@ PYTHONPATH=src python -m uas_ai_module.cli --replay tests/fixtures/replay/sample
 python scripts/jetson_health_check.py
 python scripts/phase13_check.py --stop-on-failure
 python scripts/phase14_check.py --stop-on-failure
+python scripts/phase15_check.py --stop-on-failure
+python scripts/phase16_check.py --stop-on-failure
+python scripts/phase17_check.py --stop-on-failure
+python scripts/phase18_check.py --stop-on-failure
 ```
 
 ## Expected result
@@ -27,7 +31,7 @@ python scripts/phase14_check.py --stop-on-failure
 ## Current baseline
 
 ```text
-pytest: 69 passed
+pytest: 91 passed
 ```
 
 ## Safety checks

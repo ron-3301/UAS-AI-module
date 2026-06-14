@@ -35,7 +35,7 @@ Result:
 
 ```text
 Phase 13 check passed
-pytest: 69 passed
+pytest: 91 passed
 ```
 
 ## Current status by area

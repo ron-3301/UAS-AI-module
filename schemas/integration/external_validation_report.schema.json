@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "external_validation_report.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "plan_id", "advisory_only", "ok", "results"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "plan_id": { "type": "string" },
+    "advisory_only": { "type": "boolean", "const": true },
+    "ok": { "type": "boolean" },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "kind", "enabled", "ok", "command", "returncode"],
+        "properties": {
+          "name": { "type": "string" },
+          "kind": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "ok": { "type": "boolean" },
+          "command": { "type": "array", "items": { "type": "string" } },
+          "returncode": { "type": ["integer", "null"] },
+          "stdout": { "type": "string" },
+          "stderr": { "type": "string" },
+          "skipped_reason": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

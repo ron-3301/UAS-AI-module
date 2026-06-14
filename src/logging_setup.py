@@ -1,5 +1,7 @@
-# loguru sink wiring. used by src.cli and every training script entry.
 from __future__ import annotations
+
+# loguru sink wiring. used by src.cli and every training script entry.
+
 
 import sys
 from pathlib import Path

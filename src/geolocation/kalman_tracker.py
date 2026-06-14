@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 # layer 4 stub. per-track Kalman filter (position+velocity in local ENU).
 # lands Phase 4 W12.
-from __future__ import annotations
+
 
 
 class GeoKalmanTracker:

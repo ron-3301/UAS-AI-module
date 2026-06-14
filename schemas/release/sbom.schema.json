@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "requirements_sbom.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "requirements"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "source_file"],
+        "properties": {
+          "name": { "type": "string" },
+          "specifier": { "type": ["string", "null"] },
+          "marker": { "type": ["string", "null"] },
+          "source_file": { "type": "string" }
+        }
+      }
+    }
+  }
+}

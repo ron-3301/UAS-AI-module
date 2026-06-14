@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 # layer 5 stub. draw boxes/labels/coords, push via RTSP (GStreamer).
 # real impl lands Phase 3 W9.
-from __future__ import annotations
+
 
 
 class VideoAnnotator:

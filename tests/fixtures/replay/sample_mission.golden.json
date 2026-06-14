@@ -1,0 +1,142 @@
+[
+  {
+    "advisory_only": true,
+    "detections": [
+      {
+        "bbox_xyxy": [
+          220.0,
+          170.0,
+          330.0,
+          260.0
+        ],
+        "class_label": "Vehicle-Wheeled",
+        "confidence": 0.82,
+        "geolocation": {
+          "alt_msl_m": 180.0,
+          "cep_m": 4.1087131436281155,
+          "covariance": null,
+          "lat": 28.613942108528946,
+          "lon": 77.20891365962298
+        },
+        "global_track_id": null,
+        "identification": {
+          "confidence": 0.4,
+          "is_civilian": false,
+          "sublabel": "Unknown"
+        },
+        "prediction": {
+          "closest_approach_m": null,
+          "intent": null,
+          "intent_confidence": null,
+          "tcpa_s": null
+        },
+        "risk_score": null,
+        "safety_filters_triggered": [
+          "stale_telemetry",
+          "stale_frame"
+        ],
+        "source_uas_ids": [
+          "uas-golden"
+        ],
+        "track_id": "mock-track-1",
+        "validity_flag": false,
+        "validity_reason": "stale_telemetry"
+      }
+    ],
+    "frame_id": "replay-000001",
+    "health": {
+      "camera_stale_ms": "<normalized>",
+      "latency_ms": "<normalized>",
+      "power_w": "<normalized>",
+      "status": "degraded",
+      "telemetry_stale_ms": "<normalized>",
+      "temperature_c": "<normalized>",
+      "warnings": [
+        "stale_frame: <normalized> ms",
+        "stale_telemetry: <normalized> ms"
+      ]
+    },
+    "mission_profile": "replay",
+    "ownship": {
+      "alt_agl_m": 120.0,
+      "alt_msl_m": 300.0,
+      "heading_deg": 0.0,
+      "lat": 28.6139,
+      "lon": 77.209
+    },
+    "recommendations": [],
+    "schema_version": "1.1",
+    "timestamp_utc": "<normalized>",
+    "uas_id": "uas-golden"
+  },
+  {
+    "advisory_only": true,
+    "detections": [
+      {
+        "bbox_xyxy": [
+          220.0,
+          170.0,
+          330.0,
+          260.0
+        ],
+        "class_label": "Vehicle-Wheeled",
+        "confidence": 0.82,
+        "geolocation": {
+          "alt_msl_m": 180.0,
+          "cep_m": 4.138713143628116,
+          "covariance": null,
+          "lat": 28.6140489589126,
+          "lon": 77.20901748675736
+        },
+        "global_track_id": null,
+        "identification": {
+          "confidence": 0.4,
+          "is_civilian": false,
+          "sublabel": "Unknown"
+        },
+        "prediction": {
+          "closest_approach_m": null,
+          "intent": null,
+          "intent_confidence": null,
+          "tcpa_s": null
+        },
+        "risk_score": null,
+        "safety_filters_triggered": [
+          "stale_telemetry",
+          "stale_frame"
+        ],
+        "source_uas_ids": [
+          "uas-golden"
+        ],
+        "track_id": "mock-track-1",
+        "validity_flag": false,
+        "validity_reason": "stale_telemetry"
+      }
+    ],
+    "frame_id": "replay-000002",
+    "health": {
+      "camera_stale_ms": "<normalized>",
+      "latency_ms": "<normalized>",
+      "power_w": "<normalized>",
+      "status": "degraded",
+      "telemetry_stale_ms": "<normalized>",
+      "temperature_c": "<normalized>",
+      "warnings": [
+        "stale_frame: <normalized> ms",
+        "stale_telemetry: <normalized> ms"
+      ]
+    },
+    "mission_profile": "replay",
+    "ownship": {
+      "alt_agl_m": 121.0,
+      "alt_msl_m": 301.0,
+      "heading_deg": 5.0,
+      "lat": 28.614,
+      "lon": 77.2091
+    },
+    "recommendations": [],
+    "schema_version": "1.1",
+    "timestamp_utc": "<normalized>",
+    "uas_id": "uas-golden"
+  }
+]

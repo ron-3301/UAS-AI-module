@@ -30,7 +30,7 @@ Result:
 
 ```text
 Phase 14 check passed
-pytest: 69 passed
+pytest: 91 passed
 ```
 
 ## Implemented source modules

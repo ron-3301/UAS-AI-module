@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "export_plan.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "plan_id", "artifacts"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "plan_id": { "type": "string", "pattern": "^[a-zA-Z0-9_.-]+$" },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "role", "source_checkpoint", "onnx_output", "metadata_output", "input_shape", "class_names"],
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-zA-Z0-9_.-]+$" },
+          "role": { "enum": ["detector", "classifier", "domain_discriminator", "behaviour_model"] },
+          "source_checkpoint": { "type": "string", "pattern": "\\.(pt|pth|ckpt)$" },
+          "onnx_output": { "type": "string", "pattern": "\\.onnx$" },
+          "metadata_output": { "type": "string", "pattern": "\\.json$" },
+          "tensorrt_output": { "type": ["string", "null"], "pattern": "^(.*\\.engine)?$" },
+          "input_shape": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": { "type": "integer", "minimum": 1 }
+          },
+          "class_names": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "opset": { "type": "integer", "minimum": 9, "maximum": 21 },
+          "precision": { "enum": ["fp32", "fp16", "int8"] }
+        }
+      }
+    }
+  }
+}

@@ -97,7 +97,7 @@ Covered:
 ## Current validation
 
 ```text
-pytest: 69 passed
+pytest: 91 passed
 ```
 
 ## Remaining work after Phase 14

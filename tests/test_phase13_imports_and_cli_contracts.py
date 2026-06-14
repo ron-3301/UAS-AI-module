@@ -37,6 +37,10 @@ def test_cli_and_scripts_expose_help() -> None:
         [sys.executable, "scripts/jetson_health_check.py", "--help"],
         [sys.executable, "scripts/phase13_check.py", "--help"],
         [sys.executable, "scripts/phase14_check.py", "--help"],
+        [sys.executable, "scripts/phase15_check.py", "--help"],
+        [sys.executable, "scripts/phase16_check.py", "--help"],
+        [sys.executable, "scripts/phase17_check.py", "--help"],
+        [sys.executable, "scripts/phase18_check.py", "--help"],
     ]
     for command in commands:
         proc = run_command(command)
@@ -53,6 +57,10 @@ def test_heavier_scripts_support_dry_run() -> None:
         ],
         [sys.executable, "scripts/phase13_check.py", "--dry-run"],
         [sys.executable, "scripts/phase14_check.py", "--dry-run"],
+        [sys.executable, "scripts/phase15_check.py", "--dry-run"],
+        [sys.executable, "scripts/phase16_check.py", "--dry-run"],
+        [sys.executable, "scripts/phase17_check.py", "--dry-run"],
+        [sys.executable, "scripts/phase18_check.py", "--dry-run"],
     ]
     for command in commands:
         proc = run_command(command)

@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 # layer 5 - UDP emitter for the targeting packet.
 # thin wrapper over stdlib socket. defaults to broadcast (docs/08 §2).
 # InMemoryEmitter exists so pytest can grab packets w/o opening a socket.
-from __future__ import annotations
+
 
 import json
 import socket
