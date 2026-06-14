@@ -1,0 +1,43 @@
+# core inference + ML
+# (torch / TensorRT come from the JetPack base image on Jetson - pin here for x86 dev)
+torch==2.2.2
+torchvision==0.17.2
+ultralytics==8.2.103
+onnx==1.16.2
+onnxruntime-gpu==1.18.1; platform_machine == "x86_64"
+albumentations==1.4.14
+opencv-python-headless==4.10.0.84
+numpy==1.26.4
+scipy==1.13.1
+
+# tracking / geometry
+filterpy==1.4.5
+pyproj==3.6.1
+shapely==2.0.4
+
+# telemetry / transport
+pymavlink==2.4.41
+pyzmq==26.0.3
+paho-mqtt==2.1.0
+
+# config / validation
+PyYAML==6.0.1
+jsonschema==4.23.0
+pydantic==2.7.4
+
+# service / observability
+fastapi==0.111.1
+uvicorn[standard]==0.30.3
+prometheus-client==0.20.0
+loguru==0.7.2
+
+# data versioning / experiments
+dvc[s3]==3.51.2
+mlflow==2.14.3
+
+# tests + lint
+pytest==8.3.2
+pytest-cov==5.0.0
+pytest-mock==3.14.0
+ruff==0.5.6
+mypy==1.11.1

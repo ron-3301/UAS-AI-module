@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "robustness.yaml",
+  "description": "Defensive robustness and sensor-degradation controls.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "spoof_detector",
+    "input_filter",
+    "defence"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "spoof_detector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "max_gps_vo_position_delta_m",
+        "max_gps_vo_velocity_delta_mps"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "max_gps_vo_position_delta_m": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_gps_vo_velocity_delta_mps": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "window_size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "fail_closed_on_spoof": {
+          "type": "boolean"
+        }
+      }
+    },
+    "input_filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "dust_noise_threshold"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "dust_noise_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "temporal_window": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "min_valid_contrast": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "degraded_output_on_filter": {
+          "type": "boolean"
+        }
+      }
+    },
+    "defence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "methods"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "jpeg_reencode",
+              "random_crop",
+              "median_filter",
+              "none"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "jpeg_quality": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 100
+        },
+        "random_crop_px": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 128
+        }
+      }
+    },
+    "failure_detection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_camera_stale_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        },
+        "max_telemetry_stale_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        },
+        "max_inference_stale_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        }
+      }
+    }
+  }
+}

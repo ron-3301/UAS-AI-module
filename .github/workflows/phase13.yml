@@ -1,0 +1,20 @@
+name: phase14-gate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  phase14:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test/runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . pytest jsonschema PyYAML numpy
+      - name: Run Phase 14 gate
+        run: python scripts/phase14_check.py --stop-on-failure

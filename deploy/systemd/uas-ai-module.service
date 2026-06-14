@@ -1,0 +1,22 @@
+[Unit]
+Description=UAS AI Module advisory runtime
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=uasai
+Group=uasai
+WorkingDirectory=/opt/uas-ai-module
+Environment=PYTHONPATH=/opt/uas-ai-module/src
+ExecStart=/usr/bin/python3 -m uas_ai_module.cli --config /etc/uas-ai-module/inference.json --dry-run --validate-output-schema
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/log/uas-ai-module /var/lib/uas-ai-module
+
+[Install]
+WantedBy=multi-user.target

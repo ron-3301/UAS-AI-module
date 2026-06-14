@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "mission_replay.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "mission_id", "frames"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "mission_id": { "type": "string", "pattern": "^[a-zA-Z0-9_.-]+$" },
+    "loop": { "type": "boolean" },
+    "frames": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["frame_id", "timestamp_utc", "width", "height", "telemetry"],
+        "properties": {
+          "frame_id": { "type": "string", "minLength": 1 },
+          "timestamp_utc": { "type": "string", "format": "date-time" },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "image_path": { "type": "string" },
+          "fill_value": {
+            "oneOf": [
+              { "type": "integer", "minimum": 0, "maximum": 255 },
+              {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": { "type": "integer", "minimum": 0, "maximum": 255 }
+              }
+            ]
+          },
+          "telemetry": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["lat_deg", "lon_deg", "alt_msl_m"],
+            "properties": {
+              "timestamp_utc": { "type": "string", "format": "date-time" },
+              "lat_deg": { "type": "number", "minimum": -90, "maximum": 90 },
+              "lon_deg": { "type": "number", "minimum": -180, "maximum": 180 },
+              "alt_msl_m": { "type": "number" },
+              "alt_agl_m": { "type": ["number", "null"], "minimum": 0 },
+              "roll_deg": { "type": "number", "minimum": -180, "maximum": 180 },
+              "pitch_deg": { "type": "number", "minimum": -180, "maximum": 180 },
+              "yaw_deg": { "type": "number", "minimum": -360, "maximum": 360 },
+              "velocity_ned_mps": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "prediction.yaml",
+  "description": "Intent and TCPA prediction configuration.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "behaviour_model",
+    "tcpa",
+    "intent"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "behaviour_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "model_path",
+        "history_frames",
+        "horizon_s"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "model_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(.*\\.onnx)?$"
+        },
+        "history_frames": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 10000
+        },
+        "horizon_s": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3600
+        },
+        "classes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "unknown",
+              "stop",
+              "turn",
+              "approach",
+              "evade",
+              "transit"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "tcpa": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "max_horizon_s",
+        "min_relative_speed_mps"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "max_horizon_s": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3600
+        },
+        "min_relative_speed_mps": {
+          "type": "number",
+          "minimum": 0
+        },
+        "alert_distance_m": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "use_covariance": {
+          "type": "boolean"
+        }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "min_confidence"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "min_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "unknown_below_confidence": {
+          "type": "boolean"
+        },
+        "smoothing_window": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    }
+  }
+}

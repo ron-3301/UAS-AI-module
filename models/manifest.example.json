@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "artifacts": [
+    {
+      "name": "detector-example",
+      "role": "detector",
+      "path": "detector.onnx",
+      "backend": "onnxruntime",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "input_shape": [1, 3, 640, 640],
+      "class_names": [
+        "Person",
+        "Vehicle-Wheeled",
+        "Vehicle-Tracked",
+        "Aircraft-Rotary",
+        "Aircraft-Fixed",
+        "Watercraft",
+        "Structure-Temp"
+      ],
+      "training_dataset_version": "placeholder",
+      "metrics": {}
+    }
+  ]
+}

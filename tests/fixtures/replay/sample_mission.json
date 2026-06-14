@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "mission_id": "sample-replay",
+  "loop": false,
+  "frames": [
+    {
+      "frame_id": "replay-000001",
+      "timestamp_utc": "2026-06-14T13:00:00Z",
+      "width": 640,
+      "height": 480,
+      "fill_value": [0, 0, 0],
+      "telemetry": {
+        "timestamp_utc": "2026-06-14T13:00:00Z",
+        "lat_deg": 28.6139,
+        "lon_deg": 77.209,
+        "alt_msl_m": 300.0,
+        "alt_agl_m": 120.0,
+        "roll_deg": 0.0,
+        "pitch_deg": 0.0,
+        "yaw_deg": 0.0,
+        "velocity_ned_mps": [0.0, 0.0, 0.0]
+      }
+    },
+    {
+      "frame_id": "replay-000002",
+      "timestamp_utc": "2026-06-14T13:00:01Z",
+      "width": 640,
+      "height": 480,
+      "fill_value": 8,
+      "telemetry": {
+        "timestamp_utc": "2026-06-14T13:00:01Z",
+        "lat_deg": 28.614,
+        "lon_deg": 77.2091,
+        "alt_msl_m": 301.0,
+        "alt_agl_m": 121.0,
+        "yaw_deg": 5.0
+      }
+    }
+  ]
+}

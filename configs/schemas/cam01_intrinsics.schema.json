@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "cam_intrinsics.yaml",
+  "type": "object",
+  "required": ["version", "camera_id", "resolution", "fx", "fy", "cx", "cy", "mount"],
+  "properties": {
+    "version":    { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "camera_id":  { "type": "string", "pattern": "^[a-zA-Z0-9_-]+$" },
+    "make_model": { "type": "string" },
+    "resolution": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width":  { "type": "integer", "minimum": 64 },
+        "height": { "type": "integer", "minimum": 64 }
+      }
+    },
+    "fx": { "type": "number", "exclusiveMinimum": 0 },
+    "fy": { "type": "number", "exclusiveMinimum": 0 },
+    "cx": { "type": "number" },
+    "cy": { "type": "number" },
+    "distortion_model": { "enum": ["plumb_bob", "equidistant", "none"] },
+    "distortion": {
+      "type": "object",
+      "properties": {
+        "k1": { "type": "number" }, "k2": { "type": "number" },
+        "p1": { "type": "number" }, "p2": { "type": "number" },
+        "k3": { "type": "number" }, "k4": { "type": "number" }
+      }
+    },
+    "mount": {
+      "type": "object",
+      "required": ["translation_m", "rotation_deg"],
+      "properties": {
+        "translation_m": {
+          "type": "object",
+          "required": ["x", "y", "z"],
+          "properties": {
+            "x": { "type": "number" }, "y": { "type": "number" }, "z": { "type": "number" }
+          }
+        },
+        "rotation_deg": {
+          "type": "object",
+          "required": ["roll", "pitch", "yaw"],
+          "properties": {
+            "roll":  { "type": "number", "minimum": -180, "maximum": 180 },
+            "pitch": { "type": "number", "minimum": -180, "maximum": 180 },
+            "yaw":   { "type": "number", "minimum": -180, "maximum": 180 }
+          }
+        }
+      }
+    },
+    "calibrated_on":         { "type": "string" },
+    "calibrated_by":         { "type": "string" },
+    "reprojection_error_px": { "type": "number", "minimum": 0 }
+  }
+}

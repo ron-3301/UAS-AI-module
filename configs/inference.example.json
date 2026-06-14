@@ -1,0 +1,44 @@
+{
+  "version": "1.0",
+  "model": {
+    "detection_weights": "models/detector.onnx",
+    "detection_input_size": 640,
+    "detection_conf_threshold": 0.35,
+    "detection_iou_threshold": 0.45,
+    "classifier_weights": null,
+    "classifier_input_size": 224,
+    "classifier_topk": 3
+  },
+  "sensor": {
+    "modality": "EO",
+    "source": "mock",
+    "calibration_file": "configs/cam01_intrinsics.example.json"
+  },
+  "telemetry": {
+    "source": "mock",
+    "udp_port": 14550,
+    "max_stale_ms": 1000
+  },
+  "geolocation": {
+    "terrain_model": "flat_earth",
+    "dted_path": null,
+    "vo_fallback_enabled": false,
+    "vo_max_seconds": 30
+  },
+  "output": {
+    "json_socket_addr": "127.0.0.1",
+    "json_socket_port": 5005,
+    "health_port": 8080,
+    "mqtt_broker": "localhost",
+    "mqtt_port": 1883,
+    "mqtt_uas_id": "uas-dry-run",
+    "sqlite_path": "logs/advisory.sqlite"
+  },
+  "mission_profile": "wide_area",
+  "jetson": {
+    "power_mode": "25W",
+    "pin_inference_cpus": [2, 3, 4, 5]
+  },
+  "log_level": "INFO",
+  "log_dir": "logs"
+}

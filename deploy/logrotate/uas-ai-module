@@ -1,0 +1,8 @@
+/var/log/uas-ai-module/*.log {
+    daily
+    rotate 14
+    compress
+    missingok
+    notifempty
+    copytruncate
+}

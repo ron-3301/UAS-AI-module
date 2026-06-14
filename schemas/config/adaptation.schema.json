@@ -1,0 +1,244 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "adaptation.yaml",
+  "description": "Runtime-safe online adaptation controls. Training/fine-tuning execution remains x86/offboard unless explicitly marked.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "tta",
+    "pseudo_labeler",
+    "domain_discriminator",
+    "replay_buffer",
+    "adaptive_threshold"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "tta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "max_views"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "max_views": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "flip_horizontal": {
+          "type": "boolean"
+        },
+        "rotations_deg": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "number",
+            "minimum": -45,
+            "maximum": 45
+          }
+        },
+        "merge_iou_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "pseudo_labeler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "min_confidence",
+        "output_dir",
+        "max_samples"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "min_confidence": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 0.999
+        },
+        "min_track_age_frames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "output_dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "max_samples": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "write_images": {
+          "type": "boolean"
+        },
+        "write_annotations": {
+          "type": "boolean"
+        }
+      }
+    },
+    "online_finetune": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Controller only. Actual training must run offboard/x86 unless policy changes.",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "offboard_only": {
+          "type": "boolean",
+          "const": true
+        },
+        "trigger_min_new_samples": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "trigger_domain_shift_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "cooldown_minutes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "domain_discriminator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "model_path",
+        "shift_threshold"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "model_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(.*\\.onnx)?$"
+        },
+        "input_size": {
+          "type": "integer",
+          "enum": [
+            64,
+            96,
+            128,
+            160,
+            224,
+            256,
+            320
+          ]
+        },
+        "shift_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "window_size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    "replay_buffer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "root",
+        "max_items"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "max_items": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000000
+        },
+        "min_old_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "eviction": {
+          "enum": [
+            "fifo",
+            "reservoir"
+          ]
+        }
+      }
+    },
+    "adaptive_threshold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "base_threshold",
+        "min_threshold",
+        "max_threshold"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "base_threshold": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 0.99
+        },
+        "min_threshold": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 0.99
+        },
+        "max_threshold": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 0.99
+        },
+        "entropy_window": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "max_delta_per_minute": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

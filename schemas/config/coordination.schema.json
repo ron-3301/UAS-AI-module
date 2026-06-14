@@ -1,0 +1,236 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "coordination.yaml",
+  "description": "Multi-UAS advisory track-sharing configuration.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "node_id",
+    "mesh",
+    "association",
+    "fusion",
+    "bandwidth",
+    "security"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "fleet_id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "mesh": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transport",
+        "pub_endpoint",
+        "sub_endpoints",
+        "topic"
+      ],
+      "properties": {
+        "transport": {
+          "enum": [
+            "zeromq_pubsub"
+          ]
+        },
+        "pub_endpoint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sub_endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "maxItems": 128
+        },
+        "topic": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_./-]+$"
+        },
+        "send_hz": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 100
+        },
+        "receive_timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "message_ttl_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        }
+      }
+    },
+    "protobuf": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_file": {
+          "type": "string",
+          "pattern": ".*\\.proto$"
+        },
+        "generated_module": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.]+$"
+        }
+      }
+    },
+    "association": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "max_distance_m",
+        "min_feature_similarity"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "hungarian"
+          ]
+        },
+        "max_distance_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10000
+        },
+        "min_feature_similarity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "position_weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "appearance_weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "class_mismatch_penalty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "fusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method"
+      ],
+      "properties": {
+        "method": {
+          "enum": [
+            "federated_kalman",
+            "local_only"
+          ]
+        },
+        "max_covariance_trace": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "stale_track_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        }
+      }
+    },
+    "bandwidth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_kbps",
+        "compression",
+        "drop_policy"
+      ],
+      "properties": {
+        "max_kbps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "compression": {
+          "enum": [
+            "none",
+            "zlib"
+          ]
+        },
+        "drop_policy": {
+          "enum": [
+            "drop_oldest",
+            "drop_low_confidence",
+            "local_only"
+          ]
+        },
+        "max_tracks_per_packet": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "require_authentication",
+        "allow_unsigned"
+      ],
+      "properties": {
+        "require_authentication": {
+          "type": "boolean"
+        },
+        "allow_unsigned": {
+          "type": "boolean",
+          "const": false
+        },
+        "auth_method": {
+          "enum": [
+            "ed25519",
+            "hmac-sha256",
+            "none"
+          ]
+        },
+        "public_key_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "private_key_file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "replay_window_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        }
+      }
+    }
+  }
+}

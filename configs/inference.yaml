@@ -1,0 +1,6 @@
+version: "1.1"
+mission_id: "MSN-20260611-DEV"
+detection: {model_path: "models/weights/detector.pt", conf_threshold: 0.30, iou_threshold: 0.45}
+identification: {model_path: "models/weights/classifier.onnx", enabled: true, top_k: 3}
+geolocation: {camera_intrinsics: "configs/cam01_intrinsics.yaml", terrain_altitude_m: 0.0}
+output: {udp_host: "127.0.0.1", udp_port: 5005, enable_rtp: true, enable_mqtt: false}

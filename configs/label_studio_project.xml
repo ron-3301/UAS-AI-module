@@ -1,0 +1,58 @@
+<!--
+  Label Studio labelling config for the UAS AI Module.
+  Mirrors the 7-class taxonomy in docs/11_class_taxonomy_and_threat_model.md
+  and the SOP in docs/15_annotation_sop.md.
+
+  Import with: label-studio start -> Projects -> Settings -> Labeling Interface
+  -> "Browse Templates" -> "Custom" and paste this XML.
+-->
+<View>
+  <Header value="UAS AI Module — annotation v1.0"/>
+  <Text name="instructions" value="Follow docs/15_annotation_sop.md. Tight boxes (≤ 2 px margin). Sub-label every box. If unsure, pick &quot;Unknown&quot;."/>
+
+  <Image name="image" value="$image" zoom="true" zoomControl="true" rotateControl="false"/>
+
+  <RectangleLabels name="bbox" toName="image">
+    <Label value="Person"           background="#ff595e"/>
+    <Label value="Vehicle-Wheeled"  background="#ffca3a"/>
+    <Label value="Vehicle-Tracked"  background="#8ac926"/>
+    <Label value="Aircraft-Rotary"  background="#1982c4"/>
+    <Label value="Aircraft-Fixed"   background="#6a4c93"/>
+    <Label value="Watercraft"       background="#0096c7"/>
+    <Label value="Structure-Temp"   background="#9d6b53"/>
+  </RectangleLabels>
+
+  <Choices name="sublabel" toName="image" perRegion="true" required="true"
+           visibleWhen="region-selected">
+    <Header value="Sub-label (operationally meaningful identity):"/>
+    <Choice value="Civilian"/>
+    <Choice value="Civilian-Sedan"/>
+    <Choice value="Civilian-Truck"/>
+    <Choice value="Combatant-Unarmed"/>
+    <Choice value="Combatant-Armed"/>
+    <Choice value="Humvee"/>
+    <Choice value="Toyota-Hilux"/>
+    <Choice value="Ural-4320"/>
+    <Choice value="BTR-wheeled"/>
+    <Choice value="T-72"/>
+    <Choice value="T-90"/>
+    <Choice value="BMP-2"/>
+    <Choice value="M1-Abrams"/>
+    <Choice value="Bulldozer"/>
+    <Choice value="Unknown"/>
+  </Choices>
+
+  <Choices name="image_tags" toName="image" choice="multiple" showInLine="true">
+    <Header value="Image-level conditions (apply if relevant):"/>
+    <Choice value="night"/>
+    <Choice value="rain"/>
+    <Choice value="snow"/>
+    <Choice value="camouflage"/>
+    <Choice value="low_contrast"/>
+    <Choice value="motion_blur"/>
+    <Choice value="partial_truncation"/>
+    <Choice value="heavy_occlusion"/>
+    <Choice value="destroyed"/>
+    <Choice value="synthetic"/>
+  </Choices>
+</View>

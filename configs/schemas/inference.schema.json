@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "inference.yaml",
+  "type": "object",
+  "required": ["version", "model", "sensor", "telemetry", "output"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+    "model": {
+      "type": "object",
+      "required": ["detection_weights", "detection_conf_threshold"],
+      "properties": {
+        "detection_weights":        { "type": "string", "pattern": "\\.(pt|onnx|engine)$" },
+        "detection_input_size":     { "type": "integer", "enum": [320, 416, 480, 512, 640, 800, 960, 1280] },
+        "detection_conf_threshold": { "type": "number",  "minimum": 0.1, "maximum": 0.99 },
+        "detection_iou_threshold":  { "type": "number",  "minimum": 0.1, "maximum": 0.99 },
+        "classifier_weights":       { "type": ["string", "null"] },
+        "classifier_input_size":    { "type": "integer", "minimum": 64, "maximum": 512 },
+        "classifier_topk":          { "type": "integer", "minimum": 1, "maximum": 10 }
+      }
+    },
+    "sensor": {
+      "type": "object",
+      "required": ["modality", "source", "calibration_file"],
+      "properties": {
+        "modality":         { "enum": ["EO", "IR"] },
+        "source":           { "type": "string" },
+        "calibration_file": { "type": "string" }
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "required": ["source", "udp_port"],
+      "properties": {
+        "source":       { "enum": ["mavlink", "mock", "file"] },
+        "udp_port":     { "type": "integer", "minimum": 1024, "maximum": 65535 },
+        "max_stale_ms": { "type": "integer", "minimum": 0,    "maximum": 10000 }
+      }
+    },
+    "geolocation": {
+      "type": "object",
+      "properties": {
+        "terrain_model":       { "enum": ["flat_earth", "dted1", "dted2"] },
+        "dted_path":           { "type": ["string", "null"] },
+        "vo_fallback_enabled": { "type": "boolean" },
+        "vo_max_seconds":      { "type": "integer", "minimum": 1, "maximum": 600 }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["json_socket_port"],
+      "properties": {
+        "json_socket_addr": { "type": "string" },
+        "json_socket_port": { "type": "integer", "minimum": 1024, "maximum": 65535 },
+        "rtsp_port":        { "type": "integer", "minimum": 1024, "maximum": 65535 },
+        "health_port":      { "type": "integer", "minimum": 1024, "maximum": 65535 },
+        "mqtt_broker":      { "type": "string" },
+        "mqtt_port":        { "type": "integer", "minimum": 1024, "maximum": 65535 },
+        "mqtt_uas_id":      { "type": "string", "pattern": "^[a-zA-Z0-9_-]+$" },
+        "sqlite_path":      { "type": "string" }
+      }
+    },
+    "mission_profile": { "enum": ["wide_area", "tracking", "point_targeting"] },
+    "jetson": {
+      "type": "object",
+      "properties": {
+        "power_mode":         { "enum": ["MAXN", "25W", "15W", "10W"] },
+        "pin_inference_cpus": { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 11 } }
+      }
+    },
+    "log_level": { "enum": ["DEBUG", "INFO", "WARNING", "ERROR"] },
+    "log_dir":   { "type": "string" }
+  }
+}

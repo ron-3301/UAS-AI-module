@@ -1,0 +1,18 @@
+# Jetson/runtime dependencies only.
+# TensorRT is expected from JetPack and is intentionally not pinned here.
+# Forbidden at runtime: torch, torchvision, torchaudio, torch.hub usage.
+
+onnxruntime==1.18.1
+opencv-python-headless==4.10.0.84
+numpy==1.26.4
+scipy==1.13.1
+pymavlink==2.4.41
+pyzmq==26.0.3
+protobuf==5.27.2
+prometheus-client==0.20.0
+paho-mqtt==2.1.0
+cryptography==42.0.8
+PyYAML==6.0.1
+jsonschema==4.23.0
+pydantic==2.7.4
+loguru==0.7.2

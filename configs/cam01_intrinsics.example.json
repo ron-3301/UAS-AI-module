@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "camera_id": "cam01",
+  "make_model": "mock-pinhole",
+  "resolution": {
+    "width": 640,
+    "height": 480
+  },
+  "fx": 640.0,
+  "fy": 640.0,
+  "cx": 320.0,
+  "cy": 240.0,
+  "distortion_model": "none",
+  "distortion": {},
+  "mount": {
+    "translation_m": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "rotation_deg": {
+      "roll": 0.0,
+      "pitch": -90.0,
+      "yaw": 0.0
+    }
+  },
+  "calibrated_on": "2026-06-14",
+  "calibrated_by": "mock",
+  "reprojection_error_px": 0.0
+}

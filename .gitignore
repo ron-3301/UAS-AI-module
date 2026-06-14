@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build/package outputs
+build/
+dist/
+*.egg-info/
+
+# Node/frontend if a ground-station UI is added later
+node_modules/
+.next/
+.nuxt/
+.svelte-kit/
+dist/
+out/
+
+# Data/model artifacts
+artifacts/
+datasets/
+data/raw/
+data/interim/
+data/processed/
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.engine
+models/*.plan
+runs/
+mlruns/
+.dvc/cache/
+
+# Logs and local state
+logs/
+*.log
+*.sqlite
+*.db
+*.gz
+
+# Secrets/credentials
+.env
+*.pem
+*.key
+*.crt
+*.p12
+.netrc
+.git-credentials
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

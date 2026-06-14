@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "metrics.yaml",
+  "description": "Prometheus and health metrics configuration.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "prometheus",
+    "collectors"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "prometheus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "host",
+        "port",
+        "path"
+      ],
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 65535
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^/.+"
+        }
+      }
+    },
+    "collectors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "latency",
+        "detections",
+        "tracks",
+        "hardware",
+        "errors"
+      ],
+      "properties": {
+        "latency": {
+          "type": "boolean"
+        },
+        "detections": {
+          "type": "boolean"
+        },
+        "tracks": {
+          "type": "boolean"
+        },
+        "hardware": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "boolean"
+        },
+        "geolocation": {
+          "type": "boolean"
+        },
+        "mesh": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "backend": {
+          "enum": [
+            "jetson-stats",
+            "pynvml",
+            "tegrastats",
+            "none"
+          ]
+        },
+        "sample_interval_s": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3600
+        }
+      }
+    },
+    "health": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stale_sensor_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_latency_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "degraded_on_metric_failure": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

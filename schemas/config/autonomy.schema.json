@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "autonomy.yaml",
+  "description": "Advisory waypoint planning only. This schema intentionally forbids direct command mode.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "advisory_only",
+    "waypoint_advisor",
+    "safety_filter"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "advisory_only": {
+      "type": "boolean",
+      "const": true
+    },
+    "waypoint_advisor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "max_recommendations",
+        "recommendation_types"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "max_recommendations": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "recommendation_types": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "observe",
+              "reacquire",
+              "scan_poi",
+              "continue_monitoring"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "min_track_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "max_age_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600000
+        }
+      }
+    },
+    "reacquisition_planner": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "search_radius_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100000
+        },
+        "num_candidates": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "altitude_agl_m": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    "poi_scanner": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "pattern": {
+          "enum": [
+            "star",
+            "circle",
+            "lawnmower"
+          ]
+        },
+        "radius_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100000
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 1000
+        }
+      }
+    },
+    "ucb_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "exploration_c": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "reward_window": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        }
+      }
+    },
+    "safety_filter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "min_agl_m",
+        "max_agl_m",
+        "no_fly_zones"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "min_agl_m": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "max_agl_m": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "terrain_source": {
+          "enum": [
+            "flat_earth",
+            "dted1",
+            "dted2",
+            "none"
+          ]
+        },
+        "terrain_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "no_fly_zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_distance_from_home_m": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    }
+  }
+}

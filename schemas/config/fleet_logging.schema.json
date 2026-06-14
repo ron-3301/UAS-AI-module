@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "fleet_logging.yaml",
+  "description": "Fleet log aggregation and retention configuration.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "local",
+    "mqtt",
+    "retention"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "local": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "log_dir",
+        "sqlite_path",
+        "compress"
+      ],
+      "properties": {
+        "log_dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sqlite_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compress": {
+          "type": "boolean"
+        },
+        "max_file_mb": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        }
+      }
+    },
+    "mqtt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "broker",
+        "port",
+        "topic_prefix",
+        "qos"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "broker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 65535
+        },
+        "topic_prefix": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_./-]+$"
+        },
+        "qos": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "tls": {
+          "type": "boolean"
+        },
+        "client_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        }
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "days",
+        "max_total_mb"
+      ],
+      "properties": {
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3650
+        },
+        "max_total_mb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "delete_policy": {
+          "enum": [
+            "oldest_first",
+            "manual_only"
+          ]
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "redact_coordinates": {
+          "type": "boolean"
+        },
+        "redact_images": {
+          "type": "boolean"
+        },
+        "include_raw_frames": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

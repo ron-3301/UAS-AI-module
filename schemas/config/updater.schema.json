@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "updater.yaml",
+  "description": "Signed OTA update client configuration.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "enabled",
+    "manifest_url",
+    "signature",
+    "install",
+    "rollback"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "manifest_url": {
+      "type": "string",
+      "pattern": "^https://.+"
+    },
+    "check_interval_s": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 604800
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "algorithm",
+        "public_key_file"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "const": true
+        },
+        "algorithm": {
+          "enum": [
+            "ed25519"
+          ]
+        },
+        "public_key_file": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "install": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "staging_dir",
+        "current_symlink",
+        "atomic_swap"
+      ],
+      "properties": {
+        "staging_dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_symlink": {
+          "type": "string",
+          "minLength": 1
+        },
+        "atomic_swap": {
+          "type": "boolean"
+        },
+        "preflight_command": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postinstall_command": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "keep_versions"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "keep_versions": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "healthcheck_timeout_s": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600
+        }
+      }
+    },
+    "rollout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "enum": [
+            "dev",
+            "staging",
+            "canary",
+            "stable"
+          ]
+        },
+        "fleet_percentage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  }
+}
