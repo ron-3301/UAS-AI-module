@@ -220,7 +220,6 @@ configs/                         Example configs and manifests
 scripts/                         Validation, conversion, and smoke-test CLIs
 training/                        x86-only training/export entrypoints
 tests/                           Unit, regression, and integration-style tests
-docs/                            Architecture and phase documentation
 deploy/                          systemd, logrotate, and Mosquitto examples
 models/                          Example model manifests and metadata
 ```
